@@ -4,6 +4,7 @@
 
 | Operator ID | Charging Point Operator | Start Date | Included networks
 | --- | --- | --- | ---
+| CH*EPO | EPO | 10.03.2026 |
 | CH*AIL | AIL | 30.11.2022 |
 | CH*CCC | Move | 25.09.2019 |
 | CH*CPI | Chargepoint | 19.06.2023 |
@@ -25,6 +26,7 @@
 | CH*SCHARGE | S-Charge | 14.06.2021 |
 | CH*SWISSCHARGE | Swisscharge | 25.09.2019 | GoFast|
 | CH*TAE | Matterhorn Terminal Täsch | 30.11.2022 | ewz|
+
 
 ## CPOs without realtime data
 
