@@ -574,6 +574,31 @@ Retry-After: 30
 
 ## Example client workflow
 
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant N as ich-tanke-strom
+ 
+    Note over C,N: 1. Load locations
+    C->>N: GET /locations?limit=100
+    N-->>C: List of locations
+ 
+    Note over C,N: 2. Load tariffs
+    C->>N: GET /tariffs?limit=100
+    N-->>C: List of tariffs
+ 
+    Note over C,N: 3. Link
+    C->>C: Map Connector.tariff_ids to tariffs using the CPO identity
+ 
+    Note over C,N: 4. Get single status
+    C->>N: GET /status/CH/GFS/78594/evses/251674
+    N-->>C: Status of the EVSE
+ 
+    Note over C,N: 5. Get status changes
+    C->>N: GET /status?date_from=2026-08-20T15:30:00Z&limit=100
+    N-->>C: Changed status since last sync
+```
+
 | Step | Request / action | Description |
 |---|---|---|
 | 1. Load locations | `GET /locations?limit=100` | Query all location data from ich-tanke-strom.ch. The location data also contains the initial status information. |
