@@ -25,6 +25,6 @@ https://data.geo.admin.ch/ch.bfe.ladestellen-elektromobilitaet/data/ch.bfe.lades
 See [OCPI 2.3.0](https://evroaming.org/wp-content/uploads/2025/02/OCPI-2.3.0.pdf)
 & [OCPI 2.2.1](https://evroaming.org/wp-content/uploads/2024/11/OCPI-2.2.1-d2.pdf)
 
-## Web-Service / Feature-API
+## ich-tanke-strom-API
 
 See [How to query the ich-tanke-strom.ch-API](https://github.com/SFOE/ichtankestrom_Documentation/blob/main/How%20to%20query%20ich%20tanke%20strom.md)
