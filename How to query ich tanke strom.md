@@ -114,13 +114,37 @@ Every request returns a JSON object with the following fields:
 }
 ```
 
+
 ### Pagination
 
-The number of objects returned can be set with the `limit` parameter. The default is 1000 objects.
+Lists are delivered page by page (pagination according to OCPI). The page size is controlled with `limit`, the position with `offset`. With `date_from`, locations and tariffs can be limited to changes since a given point in time.
 
 | Parameter | Type | Default | Meaning |
 |---|---|---|---|
-| limit | Integer | 1000 | Maximum number of objects returned |
+| limit | Integer | 1000 | Maximum number of objects per page, 1 to 1000. For the EVSE Status API 1 to 5000 (default 5000). |
+| offset | Integer | 0 | Number of objects to skip (locations, tariffs) |
+| date_from | DateTime | – | Only objects with `last_updated` greater than or equal to this UTC timestamp (locations, tariffs). Mandatory for the EVSE Status API, see [Get status values since a point in time](#get-status-values-since-a-point-in-time). |
+
+A list response also contains the following headers:
+
+| Header | Type | Present | Meaning |
+|---|---|---|---|
+| Link | String | If more pages follow | `<URL of the next page>; rel="next"` |
+| X-Total-Count | Integer | Always | Total number of matching objects |
+| X-Limit | Integer | Always | Applied limit |
+
+If the `Link` header is missing, the last page has been reached. A page can contain fewer than `limit` objects, e.g. for very large objects.
+
+Example with 2500 locations: every response contains `X-Total-Count: 2500` and `X-Limit: 1000`. The client follows the `Link` header until there is none.
+
+| Page | Request | Objects | Link header of the response |
+|---|---|---|---|
+| 1 | `GET BASE_URL/locations?limit=1000` | 1–1000 | `<…/ocpi/locations?offset=1000&limit=1000>; rel="next"` |
+| 2 | `GET BASE_URL/locations?offset=1000&limit=1000` | 1001–2000 | `<…/ocpi/locations?offset=2000&limit=1000>; rel="next"` |
+| 3 | `GET BASE_URL/locations?offset=2000&limit=1000` | 2001–2500 | No Link header: last page |
+
+Locations and tariffs are updated several times a day. `last_updated` is the timestamp of the change at the CPO. A change can therefore only be retrieved after the next update, but with its original `last_updated`. If a CPO delivers late, the change appears later accordingly. If you synchronise with `date_from`, choose an overlap of 24 to 48 hours (e.g. `date_from` = last sync minus 24 hours).
+
 
 ### Origin and uniqueness
 
