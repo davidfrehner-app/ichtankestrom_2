@@ -154,7 +154,7 @@ Since ich-tanke-strom.ch aggregates data from several CPOs, an ID alone is not g
 
 ## Locations API
 
-A location describes a physical charging site with one or more charging stations (EVSEs), each of which has one or more connectors. The endpoint returns complete location objects including EVSEs and connectors.
+A location describes a physical charging site with one or more charging points (EVSEs), each of which has one or more connectors. The endpoint returns complete location objects including EVSEs and connectors.
 
 ### Endpoints
 
@@ -497,7 +497,7 @@ GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/tariffs/CH/ABC/TARIF
 
 ## EVSE Status API
 
-This module provides the current occupancy or operating status of individual EVSEs (e.g. `AVAILABLE`, `CHARGING`, `OUTOFORDER`). While locations and tariffs describe the static master data of a charging station, this module makes the dynamic availability accessible in real time. The API supports direct access to a status via location and EVSE, as well as querying all current status values received since a given point in time.
+This module provides the current occupancy or operating status of individual EVSEs (e.g. `AVAILABLE`, `CHARGING`, `OUTOFORDER`). While locations and tariffs describe the static master data of a charging point, this module makes the dynamic availability accessible in real time. The API supports direct access to a status via location and EVSE, as well as querying all current status values received since a given point in time.
 
 ### Endpoints
 
